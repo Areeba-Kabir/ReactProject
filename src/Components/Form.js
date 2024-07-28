@@ -31,12 +31,13 @@ export default function Form(props) {
     console.log("Email Extractor is clicked!");
     const email = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
     const valueMail = text.match(email);
-    if (valueMail === "") {
-      document.getElementById("matchEmail").value = "No email found";
+    if (!valueMail || valueMail.length === 0) {
+      document.getElementById("matchEmail").textContent = "No email found";
       console.log("Email not found!");
     } else {
-      document.getElementById("matchEmail").textContent = valueMail;
-      console.log("Email found!" + valueMail);
+      document.getElementById("matchEmail").innerHTML =
+        valueMail.join("<br>") + " ";
+      console.log("Email found! " + valueMail);
     }
   };
 
