@@ -83,7 +83,7 @@ export default function Form(props) {
           {text.split(" ").length} words and {text.length} characters.
         </p>
         <p>
-          The time it would take to read the complete text:{" "}
+          The time it would take to read the complete text is:{" "} minutes.
           {0.008 * text.split(" ").length}
         </p>
         <h2>Preview</h2>
