@@ -32,7 +32,7 @@ export default function Form(props) {
     const email = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
     const valueMail = text.match(email);
     if (!valueMail || valueMail.length === 0) {
-      document.getElementById("matchEmail").textContent = "No email found";
+      document.getElementById("matchEmail").textContent = "Email not found!";
       console.log("Email not found!");
     } else {
       document.getElementById("matchEmail").innerHTML =
@@ -41,12 +41,22 @@ export default function Form(props) {
     }
   };
 
+  const handleESClick = () => {
+    let newtext = text.split(/\s+/).join(" ");
+    setText(newtext);
+    document.getElementById("myBox").value = newtext;
+  };
+
   const [text, setText] = useState("Enter Text here");
 
   return (
     <>
       <div className="container">
-        <h1>{props.heading}</h1>
+        <h1
+          className={`text-center font-family-monospace text-${props.toggle}`}
+        >
+          {props.heading}
+        </h1>
         <div className="mb-3">
           <textarea
             className="form-control"
@@ -57,39 +67,53 @@ export default function Form(props) {
           ></textarea>
         </div>
         <div>
-          <button className="btn btn-success mx-2" onClick={handleupClick}>
+          <button
+            className="btn btn-success mx-2 fw-bold"
+            onClick={handleupClick}
+          >
             Convert to UpperCase
           </button>
-          <button className="btn btn-success mx-2" onClick={handleLowClick}>
+          <button
+            className="btn btn-success mx-2 fw-bold"
+            onClick={handleLowClick}
+          >
             LowerCase
           </button>
           <button
-            className="btn btn-success mx-2"
+            className="btn btn-success mx-2 fw-bold"
             onClick={handleclearTextClick}
           >
-            Clear
+            Clear Text
           </button>
           <button
-            className="btn btn-success mx-2"
+            className="btn btn-success mx-2 fw-bold"
             onClick={handleEmailExtractorClick}
           >
             Extract E-mail
           </button>
+          <button
+            className="btn btn-success mx-2 fw-bold"
+            onClick={handleESClick}
+          >
+            Remove Extra Spaces
+          </button>
         </div>
       </div>
-      <div className="container">
-        <h1>Text Summary</h1>
+      <div className={`container text-${props.toggle}`}>
+        <h1 className={`text-center my-3 `}>Text Summary</h1>
+        <h4>Words and charcters in text:</h4>
         <p>
           {text.split(" ").length} words and {text.length} characters.
         </p>
+        <h4>Total reading Time:</h4>
         <p>
-          The time it would take to read the complete text is:{" "} minutes.
-          {0.008 * text.split(" ").length}
+          The time it would take to read the complete text is: minutes.
+          {0.008 * text.split(" ").length}{" "}
         </p>
-        <h2>Preview</h2>
-        <p>{text}</p>
-        <h2>Extracted Email:</h2>
-        <p id="matchEmail"> </p>
+        <h4>Extracted Email:</h4>
+        <p id="matchEmail"> click the button to check for email/s.</p>
+        <h2 className="text-center">Preview</h2>
+        <p>{text.length > 0 ? text : "Enter something to preview!"}</p>
       </div>
     </>
   );
