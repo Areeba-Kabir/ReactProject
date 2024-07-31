@@ -109,7 +109,8 @@ export default function Form(props) {
         <h1 className={`text-center my-3 `}>Text Summary</h1>
         <h4>Words and charcters in text:</h4>
         <p>
-          {text.split(" ").length} words and {text.length} characters.
+          {text.split(" ").filter((word) => word !== "").length} words and{" "}
+          {text.length} characters.
         </p>
         <h4>Total reading Time:</h4>
         <p>
