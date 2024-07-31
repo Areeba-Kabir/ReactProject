@@ -3,21 +3,36 @@ import "./App.css";
 // import About from "./Components/About";
 import Form from "./Components/Form";
 import Navbar from "./Components/Navbar";
+import Alert from "./Components/Alert";
 
 function App() {
   const [Mode, setMode] = useState("light");
+
   const handleModeClick = () => {
     if (Mode === "light") {
       setMode("dark");
       document.body.style.backgroundColor = "#1d1c1c";
+      showAlert("Dark Mode has been enabled!", "success");
     } else {
       setMode("light");
       document.body.style.backgroundColor = "#efefec";
+      showAlert("Light Mode has been enabled!", "success");
     }
   };
 
   const toggle = Mode === "dark" ? "light" : "dark";
 
+  const [alert, setAlert] = useState(null);
+
+  const showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type,
+    });
+    setTimeout(() => {
+      setAlert(null);
+    }, 2000);
+  };
   return (
     <>
       <Navbar
@@ -25,8 +40,14 @@ function App() {
         handleModeClick={handleModeClick}
         Mode={Mode}
       />
+      <Alert alert={alert} />
+
       <div className="container">
-        <Form heading={"Enter the text to Analyze"} toggle={toggle} />
+        <Form
+          heading={"Enter the text to Analyze"}
+          toggle={toggle}
+          showAlert={showAlert}
+        />
       </div>
       {/* <div className="container">
         <About />

@@ -6,6 +6,7 @@ export default function Form(props) {
     let newtext = text.toUpperCase();
     setText(newtext);
     document.getElementById("myBox").value = newtext;
+    props.showAlert("converted to uppercase!", "success");
   };
 
   const handleonChange = (event) => {
@@ -18,6 +19,7 @@ export default function Form(props) {
     let newtext = text.toLowerCase();
     setText(newtext);
     document.getElementById("myBox").value = newtext;
+    props.showAlert("converted to lowercase!", "success");
   };
 
   const handleclearTextClick = () => {
@@ -25,6 +27,7 @@ export default function Form(props) {
     let newText = " ";
     setText(newText);
     document.getElementById("myBox").value = " ";
+    props.showAlert("Text cleared!", "success");
   };
 
   const handleEmailExtractorClick = () => {
@@ -34,10 +37,12 @@ export default function Form(props) {
     if (!valueMail || valueMail.length === 0) {
       document.getElementById("matchEmail").textContent = "Email not found!";
       console.log("Email not found!");
+      props.showAlert("Email not found!", "success");
     } else {
       document.getElementById("matchEmail").innerHTML =
         valueMail.join("<br>") + " ";
       console.log("Email found! " + valueMail);
+      props.showAlert("Email Found!", "success");
     }
   };
 
@@ -45,6 +50,7 @@ export default function Form(props) {
     let newtext = text.split(/\s+/).join(" ");
     setText(newtext);
     document.getElementById("myBox").value = newtext;
+    props.showAlert("Removed extra spaces!", "success");
   };
 
   const [text, setText] = useState("Enter Text here");
