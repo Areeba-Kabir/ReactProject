@@ -37,7 +37,7 @@ export default function Form(props) {
     if (!valueMail || valueMail.length === 0) {
       document.getElementById("matchEmail").textContent = "Email not found!";
       console.log("Email not found!");
-      props.showAlert("Email not found!", "success");
+      props.showAlert("Email not found!", "warning");
     } else {
       document.getElementById("matchEmail").innerHTML =
         valueMail.join("<br>") + " ";
@@ -53,52 +53,61 @@ export default function Form(props) {
     props.showAlert("Removed extra spaces!", "success");
   };
 
+  let textboxStyle = {
+    backgroundColor: props.Mode === "light" ? "white" : "#000822cc",
+    color: props.Mode === "light" ? "black" : "white",
+    border: "2px solid",
+    borderColor: props.Mode === "light" ? "black" : "white",
+    cursor: "arrow",
+  };
+
   const [text, setText] = useState("Enter Text here");
 
   return (
     <>
-      <div className="container">
+      <div className="container my-3">
         <h1
           className={`text-center font-family-monospace text-${props.toggle}`}
         >
           {props.heading}
         </h1>
-        <div className="mb-3">
+        <div className="mb-3 ">
           <textarea
-            className="form-control"
+            className="form-control my-2"
             placeholder={text}
             id="myBox"
             rows="8"
             onChange={handleonChange}
+            style={textboxStyle}
           ></textarea>
         </div>
         <div>
           <button
-            className="btn btn-success mx-2 fw-bold"
+            className="btn btn-success mx-2 my-2 fw-bold"
             onClick={handleupClick}
           >
             Convert to UpperCase
           </button>
           <button
-            className="btn btn-success mx-2 fw-bold"
+            className="btn btn-success mx-2 my-2 fw-bold"
             onClick={handleLowClick}
           >
             LowerCase
           </button>
           <button
-            className="btn btn-success mx-2 fw-bold"
+            className="btn btn-success mx-2 my-2 fw-bold"
             onClick={handleclearTextClick}
           >
             Clear Text
           </button>
           <button
-            className="btn btn-success mx-2 fw-bold"
+            className="btn btn-success mx-2 my-2 fw-bold"
             onClick={handleEmailExtractorClick}
           >
             Extract E-mail
           </button>
           <button
-            className="btn btn-success mx-2 fw-bold"
+            className="btn btn-success mx-2 my-2 fw-bold"
             onClick={handleESClick}
           >
             Remove Extra Spaces
